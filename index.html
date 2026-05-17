@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <link rel="icon" type="image/png" href="assets/image/favicon.png">
+
   <title>Netflix</title>
 
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+
+<body style="display:none;">
 
   <!-- NAVBAR -->
   <nav class="navbar">
+
     <div class="logo">Netflix</div>
 
     <ul class="nav-links">
@@ -20,6 +24,7 @@
       <li>Memories</li>
       <li>Favorites</li>
     </ul>
+
   </nav>
 
   <!-- HERO -->
@@ -42,14 +47,19 @@
       </p>
 
       <div class="buttons">
-        <button id="playBtn">▶ Play</button>
+
+        <button id="playBtn">
+          ▶ Play
+        </button>
 
         <button class="info-btn">
           More Info
         </button>
+
       </div>
 
     </div>
+
   </section>
 
   <!-- VIDEO MODAL -->
@@ -57,10 +67,17 @@
 
     <div class="video-container">
 
-      <span class="close-btn" id="closeBtn">✕</span>
+      <span class="close-btn" id="closeBtn">
+        ✕
+      </span>
 
       <video controls id="birthdayVideo">
-        <source src="assets/video/movie.mp4" type="video/mp4">
+
+        <source
+          src="assets/video/movie.mp4"
+          type="video/mp4"
+        >
+
       </video>
 
     </div>
@@ -79,8 +96,11 @@
         <img src="assets/image/lovestory.jpg">
 
         <div class="movie-info">
+
           <h3>Starring You</h3>
+
           <p>Romance • Comedy</p>
+
         </div>
 
       </div>
@@ -90,8 +110,11 @@
         <img src="assets/image/favorite.jpg">
 
         <div class="movie-info">
+
           <h3>Best Memories</h3>
+
           <p>Romance • Drama</p>
+
         </div>
 
       </div>
@@ -101,8 +124,11 @@
         <img src="assets/image/chapterone.JPG">
 
         <div class="movie-info">
+
           <h3>Chapter One</h3>
+
           <p>Romance • Comedy</p>
+
         </div>
 
       </div>
@@ -112,8 +138,11 @@
         <img src="assets/image/bdaygirl.jpg">
 
         <div class="movie-info">
+
           <h3>The Birthday Queen</h3>
+
           <p>Favorite Movie</p>
+
         </div>
 
       </div>
@@ -131,7 +160,9 @@
         FEATURED PREMIERE
       </p>
 
-      <h2>OUR LOVE STORY</h2>
+      <h2>
+        OUR LOVE STORY
+      </h2>
 
       <p>
         Two people accidentally met and somehow became each other’s favorite person.
@@ -145,7 +176,10 @@
 
     <div class="featured-image">
 
-     <img src="assets/image/ourlovestory.jpg" alt="">
+      <img
+        src="assets/image/ourlovestory.jpg"
+        alt=""
+      >
 
     </div>
 
@@ -160,48 +194,57 @@
 
   </footer>
 
-  <script src="script.js"></script>
   <!-- NETLIFY IDENTITY -->
-<script
-  type="text/javascript"
-  src="https://identity.netlify.com/v1/netlify-identity-widget.js">
-</script>
+  <script
+    type="text/javascript"
+    src="https://identity.netlify.com/v1/netlify-identity-widget.js">
+  </script>
 
-<script>
-  // Open login modal automatically
-  if (window.netlifyIdentity) {
+  <script>
 
-    netlifyIdentity.on("init", user => {
+    if (window.netlifyIdentity) {
 
-      if (!user) {
+      netlifyIdentity.on("init", user => {
+
+        // USER NOT LOGGED IN
+        if (!user) {
+
+          netlifyIdentity.open("login");
+
+        }
+
+        // USER LOGGED IN
+        else {
+
+          document.body.style.display = "block";
+
+        }
+
+      });
+
+      // AFTER LOGIN
+      netlifyIdentity.on("login", user => {
+
+        netlifyIdentity.close();
+
+        document.body.style.display = "block";
+
+      });
+
+      // AFTER LOGOUT
+      netlifyIdentity.on("logout", () => {
+
+        document.body.style.display = "none";
 
         netlifyIdentity.open("login");
 
-      }
+      });
 
-    });
+    }
 
-    // Reload after login
-    netlifyIdentity.on("login", user => {
+  </script>
 
-      console.log("Logged in:", user);
+  <script src="script.js"></script>
 
-      netlifyIdentity.close();
-
-      window.location.reload();
-
-    });
-
-    // Logout
-    netlifyIdentity.on("logout", () => {
-
-      console.log("Logged out");
-
-      window.location.reload();
-
-    });
-
-  }
-</script>
 </body>
 </html>

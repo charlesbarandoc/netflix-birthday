@@ -194,26 +194,30 @@
 
   </footer>
 
-  <!-- NETLIFY IDENTITY -->
-  <script
-    type="text/javascript"
-    src="https://identity.netlify.com/v1/netlify-identity-widget.js">
-  </script>
+ <!-- NETLIFY IDENTITY -->
+<script
+  type="text/javascript"
+  src="https://identity.netlify.com/v1/netlify-identity-widget.js">
+</script>
 
-  <script>
+<script>
+
+  window.addEventListener("load", () => {
 
     if (window.netlifyIdentity) {
 
+      netlifyIdentity.init();
+
       netlifyIdentity.on("init", user => {
 
-        // USER NOT LOGGED IN
+        // NOT LOGGED IN
         if (!user) {
 
           netlifyIdentity.open("login");
 
         }
 
-        // USER LOGGED IN
+        // LOGGED IN
         else {
 
           document.body.style.display = "block";
@@ -222,7 +226,7 @@
 
       });
 
-      // AFTER LOGIN
+      // LOGIN SUCCESS
       netlifyIdentity.on("login", user => {
 
         netlifyIdentity.close();
@@ -231,7 +235,7 @@
 
       });
 
-      // AFTER LOGOUT
+      // LOGOUT
       netlifyIdentity.on("logout", () => {
 
         document.body.style.display = "none";
@@ -242,7 +246,9 @@
 
     }
 
-  </script>
+  });
+
+</script>
 
   <script src="script.js"></script>
 
